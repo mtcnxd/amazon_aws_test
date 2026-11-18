@@ -1,3 +1,4 @@
+from setuptools.errors import ExecError
 from Services import ClientService
 import datetime
 
@@ -12,13 +13,18 @@ client_data = {
     'address': 'Calle 23 #123'
 }
 
-client_service.create_row('cusomer#5', 'profile#5', 'customer', client_data)
-print("Item insertado correctamente")
+try:
+    client_service.create_row('cusomer#5', 'profile#5', 'customer', client_data)
 
-result = client_service.get_row('customer#1', 'profile#1')
+    print("Item insertado correctamente")
 
-if result is not None:
-    print(result['Item'])
-    print("Parsed data:", result['Item']['data']['name'])
-    print("Parsed data:", result['Item']['data']['phone'])
-    print("Parsed data:", result['Item']['data']['email'])
+    result = client_service.get_row('customer#1', 'profile#1')
+
+    if result is not None:
+        print(result['Item'])
+        print("Parsed data:", result['Item']['data']['name'])
+        print("Parsed data:", result['Item']['data']['phone'])
+        print("Parsed data:", result['Item']['data']['email'])
+
+except Exception as error:
+    print(f"Error: {error}")

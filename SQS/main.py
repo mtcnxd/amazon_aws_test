@@ -1,10 +1,8 @@
-import config
 from itertools import count
+from datetime import datetime
 import boto3
 import json
-from datetime import datetime
-
-queue_url = 'https://sqs.us-east-1.amazonaws.com/204380998201/my_test_queue'
+import config
 
 sqs = boto3.client(
     'sqs', 
@@ -12,6 +10,8 @@ sqs = boto3.client(
     aws_secret_access_key=config.aws_secret_access_key,
     region_name='us-east-1'
 )
+
+queue_url = 'https://sqs.us-east-1.amazonaws.com/204380998201/my_test_queue'
 
 try:
     for i in range(1, 6):
@@ -21,14 +21,12 @@ try:
             'created_at': datetime.now().isoformat(),
         })
 
-        '''
         response = sqs.send_message(
             QueueUrl=queue_url,
             MessageBody=mensaje
         )
-        '''
 
-        # print(f"{response['MessageId']} | Mensaje enviado con exito | count {i}")
+        print(f"{response['MessageId']} | Mensaje enviado con exito | count {i}")
 
     # 2. Recibir mensajes de la cola
     response = sqs.receive_message(
