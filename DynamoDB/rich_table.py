@@ -6,16 +6,16 @@ from rich.panel import Panel
 from rich.live import Live
 from rich.tree import Tree
 from rich.columns import Columns
-import httpx
+import requests
 import json
 import time
 
 def get_data() -> dict | None:
-   response = httpx.get("https://mecanicarubio.com/api/investments/total")
+   response = requests.get("https://mecanicarubio.com/api/investments/total")
    if response.status_code != 200:
       return None
 
-   return json.loads(response.text)
+   return response.json()
 
 def generar_tabla():
     table = Table()
@@ -24,6 +24,9 @@ def generar_tabla():
     return table
 
 data = get_data()
+
+if data is None:
+    print("No response received")
 
 console = Console()
 

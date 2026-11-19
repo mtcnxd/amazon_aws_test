@@ -1,4 +1,3 @@
-from setuptools.errors import ExecError
 from Services import ClientService
 import datetime
 
@@ -6,7 +5,7 @@ import datetime
 
 client_service = ClientService()
 
-client_data = {
+client_data: dict[str:str] = {
     'name': 'Melisa Joan Hart',
     'phone': '9341128492',
     'email': 'melisajoanhart@gmail.com',
@@ -14,7 +13,7 @@ client_data = {
 }
 
 try:
-    client_service.create_row('cusomer#5', 'profile#5', 'customer', client_data)
+    client_service.create_row('customer#5', 'profile#5', 'customer', client_data)
 
     print("Item insertado correctamente")
 
