@@ -1,29 +1,34 @@
 from Services import ClientService
-import datetime
 
 # Resource is the type of DB service
 
-client_service = ClientService()
+AWS_Cient = ClientService()
 
-client_data: dict[str:str] = {
-    'name': 'Melisa Joan Hart',
+data: dict[str:str] = {
+    'name': 'Ava Max',
     'phone': '9341128492',
-    'email': 'melisajoanhart@gmail.com',
-    'address': 'Calle 23 #123'
+    'email': 'avamax@gmail.com',
+    'address': 'Calle 42 #123',
 }
 
 try:
-    client_service.create_row('customer#5', 'profile#5', 'customer', client_data)
+    AWS_Cient.create_row(
+        'userid#1', 
+        'trade',
+        data
+    )
 
-    print("Item insertado correctamente")
+    print("Success | Item created")
 
-    result = client_service.get_row('customer#1', 'profile#1')
+    items = AWS_Cient.query('userid#1')
 
-    if result is not None:
-        print(result['Item'])
-        print("Parsed data:", result['Item']['data']['name'])
-        print("Parsed data:", result['Item']['data']['phone'])
-        print("Parsed data:", result['Item']['data']['email'])
+    for item in items:
+        print(item['data'], item['sk'])
+
+    AWS_Cient.create_element_with_uuid(data)
+    result = AWS_Cient.get_element_by_uuid('ba0e0ac8-8a49-4c07-8928-2297d0633347')
+
+    print(result)
 
 except Exception as error:
     print(f"Error: {error}")
