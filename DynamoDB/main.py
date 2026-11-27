@@ -25,8 +25,8 @@ try:
     for item in items:
         print(item['data'], item['sk'])
 
-    AWS_Cient.create_element_with_uuid(data)
-    result = AWS_Cient.get_element_by_uuid('ba0e0ac8-8a49-4c07-8928-2297d0633347')
+    uuid: str = AWS_Cient.create_element_with_uuid(data)
+    result: dict = AWS_Cient.get_element_by_uuid(uuid)
 
     print(result)
 

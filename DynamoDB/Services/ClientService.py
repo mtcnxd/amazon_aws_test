@@ -15,14 +15,18 @@ class ClientService:
 
         self.table = dynamodb.Table('mecanica_rubio')
 
-    def create_element_with_uuid(self, data: dict) -> dict:
-        return self.table.put_item(
+    def create_element_with_uuid(self, data: dict) -> str:
+        uuid = str(uuid.uuid4())
+
+        self.table.put_item(
             Item={
-                'pk': str(uuid.uuid4()),
+                'pk': uuid,
                 'sk': datetime.now().isoformat(),
                 'data': data
             }
         )
+
+        return uuid
     
     def create_row(self, pk: str, entity: str, data: dict) -> dict:
         return self.table.put_item(

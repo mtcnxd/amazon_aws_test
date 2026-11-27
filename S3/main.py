@@ -35,8 +35,7 @@ def upload_file(image_path: str, object_name: str = None):
         return {
             "success": True,
             "key": object_name,
-            "url": url,
-            "data": get_presigned_url(object_name, url)
+            "url": url
         }
 
     except ClientError as error:
